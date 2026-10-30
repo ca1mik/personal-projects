@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" rx="52" fill="#0B0B0B"/>
+  <rect x="30" y="30" width="1140" height="840" rx="38" stroke="rgba(255,255,255,0.08)"/>
+  <text x="84" y="116" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="6">05 / СТЕРИЛЬНОСТЬ</text>
+  <text x="84" y="268" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="700">ЧИСТЫЙ</text>
+  <text x="84" y="390" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="126" font-weight="700">ПРОЦЕСС</text>
+  <text x="84" y="504" fill="#BFAFA2" font-family="Arial, Helvetica, sans-serif" font-size="34">Одноразовые расходники, подготовка рабочего места и понятное сопровождение.</text>
+</svg>

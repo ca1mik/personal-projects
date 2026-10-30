@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <defs>
+    <style>
+      .bg { fill: #f5f1e8; }
+      .title { font: 700 34px Arial, sans-serif; fill: #1f3b2f; }
+      .subtitle { font: 400 18px Arial, sans-serif; fill: #4d5b54; }
+      .box { fill: #fffaf2; stroke: #355846; stroke-width: 3; rx: 18; ry: 18; }
+      .box-accent { fill: #e4efe8; stroke: #355846; stroke-width: 3; rx: 18; ry: 18; }
+      .box-warm { fill: #f7e4d6; stroke: #b66b43; stroke-width: 3; rx: 18; ry: 18; }
+      .head { font: 700 24px Arial, sans-serif; fill: #223229; }
+      .text { font: 400 18px Arial, sans-serif; fill: #2d3b34; }
+      .small { font: 400 16px Arial, sans-serif; fill: #46544d; }
+      .line { stroke: #355846; stroke-width: 4; fill: none; }
+      .line-warm { stroke: #b66b43; stroke-width: 4; fill: none; }
+      .arrow { fill: #355846; }
+      .arrow-warm { fill: #b66b43; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="980"/>
+
+  <text class="title" x="800" y="60" text-anchor="middle">Блок-схема оптоволоконного аналога системы связи</text>
+  <text class="subtitle" x="800" y="95" text-anchor="middle">Концептуальная архитектура для линии 7-10 км, формат точка-точка</text>
+
+  <rect class="box" x="90" y="150" width="560" height="670"/>
+  <text class="head" x="370" y="195" text-anchor="middle">Абонентский блок A</text>
+
+  <rect class="box-accent" x="135" y="230" width="470" height="95"/>
+  <text class="head" x="370" y="268" text-anchor="middle">Пользовательский интерфейс</text>
+  <text class="text" x="370" y="300" text-anchor="middle">микрофон / громкоговоритель / кнопка вызова / индикация</text>
+
+  <rect class="box-accent" x="135" y="365" width="470" height="95"/>
+  <text class="head" x="370" y="403" text-anchor="middle">Аудиотракт</text>
+  <text class="text" x="370" y="435" text-anchor="middle">микрофонный усилитель / фильтрация / усилитель НЧ</text>
+
+  <rect class="box-accent" x="135" y="500" width="470" height="95"/>
+  <text class="head" x="370" y="538" text-anchor="middle">Логика и управление</text>
+  <text class="text" x="370" y="570" text-anchor="middle">контроллер / режим разговора / вызов / защита / диагностика</text>
+
+  <rect class="box-warm" x="135" y="635" width="470" height="110"/>
+  <text class="head" x="370" y="675" text-anchor="middle">Оптический интерфейс</text>
+  <text class="text" x="370" y="707" text-anchor="middle">кодек или тракт преобразования / TX / RX / гальваническая развязка</text>
+
+  <rect class="box" x="730" y="350" width="140" height="270"/>
+  <text class="head" x="800" y="395" text-anchor="middle">Оптика</text>
+  <text class="text" x="800" y="440" text-anchor="middle">одномодовое</text>
+  <text class="text" x="800" y="470" text-anchor="middle">волокно</text>
+  <text class="text" x="800" y="520" text-anchor="middle">1310 нм</text>
+  <text class="text" x="800" y="570" text-anchor="middle">7-10 км</text>
+
+  <rect class="box" x="950" y="150" width="560" height="670"/>
+  <text class="head" x="1230" y="195" text-anchor="middle">Абонентский блок B</text>
+
+  <rect class="box-accent" x="995" y="230" width="470" height="95"/>
+  <text class="head" x="1230" y="268" text-anchor="middle">Пользовательский интерфейс</text>
+  <text class="text" x="1230" y="300" text-anchor="middle">микрофон / громкоговоритель / кнопка вызова / индикация</text>
+
+  <rect class="box-accent" x="995" y="365" width="470" height="95"/>
+  <text class="head" x="1230" y="403" text-anchor="middle">Аудиотракт</text>
+  <text class="text" x="1230" y="435" text-anchor="middle">микрофонный усилитель / фильтрация / усилитель НЧ</text>
+
+  <rect class="box-accent" x="995" y="500" width="470" height="95"/>
+  <text class="head" x="1230" y="538" text-anchor="middle">Логика и управление</text>
+  <text class="text" x="1230" y="570" text-anchor="middle">контроллер / режим разговора / вызов / защита / диагностика</text>
+
+  <rect class="box-warm" x="995" y="635" width="470" height="110"/>
+  <text class="head" x="1230" y="675" text-anchor="middle">Оптический интерфейс</text>
+  <text class="text" x="1230" y="707" text-anchor="middle">кодек или тракт преобразования / TX / RX / гальваническая развязка</text>
+
+  <rect class="box" x="90" y="850" width="1420" height="80"/>
+  <text class="head" x="800" y="890" text-anchor="middle">Питание и безопасность</text>
+  <text class="text" x="800" y="918" text-anchor="middle">локальное питание каждого блока / защита / контроль батареи / искробезопасность при необходимости</text>
+
+  <path class="line" d="M370 325 L370 365"/>
+  <polygon class="arrow" points="363,352 377,352 370,365"/>
+  <path class="line" d="M370 460 L370 500"/>
+  <polygon class="arrow" points="363,487 377,487 370,500"/>
+  <path class="line" d="M370 595 L370 635"/>
+  <polygon class="arrow" points="363,622 377,622 370,635"/>
+
+  <path class="line" d="M1230 325 L1230 365"/>
+  <polygon class="arrow" points="1223,352 1237,352 1230,365"/>
+  <path class="line" d="M1230 460 L1230 500"/>
+  <polygon class="arrow" points="1223,487 1237,487 1230,500"/>
+  <path class="line" d="M1230 595 L1230 635"/>
+  <polygon class="arrow" points="1223,622 1237,622 1230,635"/>
+
+  <path class="line-warm" d="M605 690 L730 690"/>
+  <polygon class="arrow-warm" points="717,683 717,697 730,690"/>
+  <path class="line-warm" d="M950 690 L870 690"/>
+  <polygon class="arrow-warm" points="883,683 883,697 870,690"/>
+
+  <path class="line" d="M370 745 L370 820 L800 820 L1230 820 L1230 745"/>
+  <path class="line" d="M370 820 L370 850"/>
+  <polygon class="arrow" points="363,837 377,837 370,850"/>
+  <path class="line" d="M1230 820 L1230 850"/>
+  <polygon class="arrow" points="1223,837 1237,837 1230,850"/>
+
+  <text class="small" x="800" y="655" text-anchor="middle">Оптический канал двусторонней передачи</text>
+  <text class="small" x="800" y="785" text-anchor="middle">Общий контур питания и требований по безопасности</text>
+</svg>

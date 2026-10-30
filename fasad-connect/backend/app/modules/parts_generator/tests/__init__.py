@@ -1,0 +1,1 @@
+"""Parts generator tests package."""

@@ -1,0 +1,8 @@
+pyyaml
+python-dotenv
+requests
+tqdm
+pandas
+jinja2
+openai-whisper
+opencv-python

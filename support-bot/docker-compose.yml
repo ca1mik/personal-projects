@@ -1,0 +1,137 @@
+x-app-environment: &app-environment
+  APP_ENV: ${APP_ENV:-local}
+  APP_NAME: ${APP_NAME:-Support Bot}
+  DEBUG: ${DEBUG:-false}
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  LOG_JSON: ${LOG_JSON:-true}
+  TIMEZONE: ${TIMEZONE:-Europe/Moscow}
+  DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://support_bot:support_bot@postgres:5432/support_bot}
+  REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+  WEBHOOK_BASE_URL: ${WEBHOOK_BASE_URL:-}
+  TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+  TELEGRAM_WEBHOOK_URL: ${TELEGRAM_WEBHOOK_URL:-}
+  TELEGRAM_PAYMENT_PROVIDER_TOKEN: ${TELEGRAM_PAYMENT_PROVIDER_TOKEN:-}
+  MAX_API_TOKEN: ${MAX_API_TOKEN:-}
+  MAX_WEBHOOK_SECRET: ${MAX_WEBHOOK_SECRET:-}
+  MAX_API_BASE_URL: ${MAX_API_BASE_URL:-https://platform-api.max.ru}
+  MAX_MOCK_MODE: ${MAX_MOCK_MODE:-true}
+  YOOKASSA_SHOP_ID: ${YOOKASSA_SHOP_ID:-}
+  YOOKASSA_SECRET_KEY: ${YOOKASSA_SECRET_KEY:-}
+  YOOKASSA_RETURN_URL: ${YOOKASSA_RETURN_URL:-}
+  YOOKASSA_WEBHOOK_SECRET: ${YOOKASSA_WEBHOOK_SECRET:-}
+  YOOKASSA_ENABLE_RECEIPTS: ${YOOKASSA_ENABLE_RECEIPTS:-false}
+  LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+  LLM_MODEL: ${LLM_MODEL:-gpt-5.4-mini}
+  LLM_API_KEY: ${LLM_API_KEY:-}
+  OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  YANDEXGPT_API_KEY: ${YANDEXGPT_API_KEY:-}
+  YANDEXGPT_FOLDER_ID: ${YANDEXGPT_FOLDER_ID:-}
+  GIGACHAT_CLIENT_ID: ${GIGACHAT_CLIENT_ID:-}
+  GIGACHAT_CLIENT_SECRET: ${GIGACHAT_CLIENT_SECRET:-}
+  ADMIN_USER_IDS: ${ADMIN_USER_IDS:-}
+  ADMIN_API_SECRET: ${ADMIN_API_SECRET:-demo-admin-secret}
+  SUPPORT_CONTACT: ${SUPPORT_CONTACT:-@support_demo}
+  CHECKIN_ENABLED: ${CHECKIN_ENABLED:-true}
+  CHECKIN_DEFAULT_TIME: ${CHECKIN_DEFAULT_TIME:-7}
+  LEGAL_DOC_VERSION: ${LEGAL_DOC_VERSION:-2026-06-10}
+  PRIVACY_POLICY_VERSION: ${PRIVACY_POLICY_VERSION:-privacy-2026-06-10}
+  OFFER_VERSION: ${OFFER_VERSION:-offer-2026-06-10}
+  DISCLAIMER_VERSION: ${DISCLAIMER_VERSION:-disclaimer-2026-06-10}
+
+services:
+  app:
+    build: .
+    container_name: support-bot-app
+    restart: unless-stopped
+    environment:
+      <<: *app-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: support-bot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-support_bot}
+      POSTGRES_USER: ${POSTGRES_USER:-support_bot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-support_bot}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-support_bot} -d ${POSTGRES_DB:-support_bot}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    container_name: support-bot-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  celery:
+    build: .
+    container_name: support-bot-celery
+    restart: unless-stopped
+    environment:
+      <<: *app-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A src.scheduler.celery_app:celery_app worker --loglevel=INFO
+    healthcheck:
+      test: ["CMD-SHELL", "ps -ef | grep '[c]elery.*worker' >/dev/null"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  celery-beat:
+    build: .
+    container_name: support-bot-celery-beat
+    restart: unless-stopped
+    environment:
+      <<: *app-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A src.scheduler.celery_app:celery_app beat --loglevel=INFO
+    healthcheck:
+      test: ["CMD-SHELL", "ps -ef | grep '[c]elery.*beat' >/dev/null"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres-data:
+  redis-data:

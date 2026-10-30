@@ -1,0 +1,45 @@
+# Template systemd unit for running the Telegram bot + booking/Robokassa
+# HTTP API (python main.py starts both in one process - see bot/main.py:run_bot).
+#
+# Setup on the VPS:
+#   1. Copy the bot/ directory to the server, e.g. /opt/likatattoo/bot
+#   2. Create /opt/likatattoo/bot/.env from bot/.env.example with production
+#      values and Linux paths (the working .env is gitignored and never
+#      copied automatically - GOOGLE_SHEETS_SERVICE_ACCOUNT_FILE in particular
+#      must point at the Linux path of the service-account JSON, e.g.
+#      /opt/likatattoo/bot/secrets/<file>.json)
+#   3. python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+#   4. Adjust User/WorkingDirectory/ExecStart below, then:
+#        sudo cp likatattoo-bot.service /etc/systemd/system/
+#        sudo systemctl daemon-reload
+#        sudo systemctl enable --now likatattoo-bot
+#   5. nginx (deploy/nginx/ppdstr.conf) proxies /api/ and /robokassa/ to
+#      127.0.0.1:8080, which is where this service listens by default
+#      (ROBOKASSA_BIND_HOST/ROBOKASSA_BIND_PORT in bot/.env).
+
+[Unit]
+Description=Lika Tattoo Telegram bot + booking API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=likatattoo
+Group=likatattoo
+WorkingDirectory=/opt/likatattoo/bot
+EnvironmentFile=/opt/likatattoo/bot/.env
+ExecStart=/opt/likatattoo/bot/.venv/bin/python main.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Hardening (relax if it conflicts with paths the bot needs to write,
+# e.g. bot/data/ for SQLite and generated images)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/opt/likatattoo/bot/data
+
+[Install]
+WantedBy=multi-user.target

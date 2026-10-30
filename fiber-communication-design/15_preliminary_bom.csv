@@ -1,0 +1,42 @@
+block,refdes,function,component_class,comment
+POWER,J1,Power input connector,connector,External power or battery input
+POWER,F1,Input protection,fuse/PTC,Primary input protection
+POWER,D1,Surge suppression,TVS diode,Clamp transients on VIN
+POWER,Q1,Reverse polarity protection,P-MOSFET or ideal diode controller,Protect against wrong polarity
+POWER,U1,Main DC/DC regulator,buck regulator,Generate +5V_MAIN
+POWER,U2,Digital LDO,LDO regulator,Generate +3V3_DIG
+POWER,U3,Analog LDO,low-noise LDO,Generate +3V3_ANA
+POWER,U4,Audio rail supply,buck/boost or dedicated regulator,Generate +VAMP if required
+POWER,L1,EMI filtering,inductor/common-mode choke,Input suppression
+POWER,C1-C8,Power filtering,capacitors,Bulk and local decoupling
+CONTROLLER,U10,System controller,industrial MCU,Main logic and state machine
+CONTROLLER,Y1,Clock source,crystal/MEMS,MCU timing reference
+CONTROLLER,U11,Reset supervisor,supervisor IC,Power-on reset and brownout
+CONTROLLER,J10,Programming header,SWD/JTAG connector,Service/debug
+AUDIO_TX,J20,Microphone connector,connector,Mic or handset input
+AUDIO_TX,D20,Input protection,ESD suppressor,Protect microphone path
+AUDIO_TX,U20A,Mic preamplifier,low-noise op-amp,Speech input gain
+AUDIO_TX,R/C network,Speech filtering,passive network,HPF/LPF and bias
+AUDIO_TX,RV20,Gain trim,trimmer/potentiometer,Optional level tuning
+CODEC,U21,Audio codec,codec/ADC-DAC,Speech digitization and playback
+AUDIO_RX,U30,Speaker amplifier,audio power amp,Drive loudspeaker or earpiece
+AUDIO_RX,J30,Speaker connector,connector,Audio output transducer
+OPTICAL,U40,Transmit transport interface,serializer/line interface,Prepare TX data stream
+OPTICAL,U41,Receive transport interface,deserializer/line interface,Recover RX data stream
+OPTICAL,J40,TX fiber connector,optical connector,Transmit optical path
+OPTICAL,J41,RX fiber connector,optical connector,Receive optical path
+OPTICAL,U42,Link monitor,status conditioning,Generate link status
+UI,S1,Call button,pushbutton,User call action
+UI,S2,PTT button,pushbutton,User transmit action
+UI,LED1,Power LED,LED,Power indication
+UI,LED2,Call LED,LED,Call indication
+UI,LED3,TX LED,LED,Transmit indication
+UI,LED4,Fault LED,LED,Fault indication
+UI,BZ1,Buzzer,transducer,Incoming call/fault signal
+UI,Q50,Buzzer switch,transistor/MOSFET,Drive buzzer
+SUPERVISION,U60,Watchdog/safety monitor,watchdog IC,Recover from firmware fault
+SUPERVISION,U61,Battery monitor,monitor IC or divider+ADC,Low battery detection
+SUPERVISION,U62,Fault combiner,logic/supervisor,Aggregate fault states
+SUPERVISION,Q60-Q61,Load switches,load switch MOSFETs,Controlled power gating
+GEN,Rxx,Signal conditioning,resistors,Pull-ups dividers terminations
+GEN,Cxx,Decoupling and filtering,capacitors,All local supply and analog filtering

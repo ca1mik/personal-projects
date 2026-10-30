@@ -1,0 +1,47 @@
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+
+bot/.env
+*.env
+*.env.local
+
+# Service-account / credential keys
+bot/secrets/
+*.service-account.json
+*-key.json
+
+*.log
+*.out.log
+*.err.log
+
+bot/data/
+
+# Caddy runtime state - ACME accounts, private keys, certs (machine-specific, regenerated automatically)
+deploy/caddy/storage/
+
+# Personal documents not related to site/bot code
+docs/personal/
+
+.idea/
+Thumbs.db
+Desktop.ini
+
+# Local credentials and generated files
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+*.log

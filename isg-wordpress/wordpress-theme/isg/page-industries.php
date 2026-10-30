@@ -1,0 +1,5 @@
+<?php get_header(); ?>
+<main id="main"><div class="page-intro"><div class="wrap"><?php isg_breadcrumbs(); ?><h1><?php esc_html_e('Industries', 'isg'); ?></h1><p><?php esc_html_e('Find solutions for your sector.', 'isg'); ?></p></div></div><section class="section"><div class="wrap">
+  <?php $terms = get_terms(array('taxonomy' => 'isg_industry', 'hide_empty' => false)); if (!is_wp_error($terms) && $terms) : ?><div class="industry-grid"><?php foreach ($terms as $term) : ?><article class="industry-card"><div class="industry-card-body"><span class="card-kicker"><?php esc_html_e('Industry', 'isg'); ?></span><h3><?php echo esc_html($term->name); ?></h3><p><?php echo esc_html($term->description); ?></p><a class="text-link" href="<?php echo esc_url(get_term_link($term)); ?>"><?php esc_html_e('View solutions', 'isg'); ?> &#8594;</a></div></article><?php endforeach; ?></div><?php else : ?><p class="empty"><?php esc_html_e('Industry solutions will appear here once published.', 'isg'); ?></p><?php endif; ?>
+</div></section></main>
+<?php get_footer(); ?>

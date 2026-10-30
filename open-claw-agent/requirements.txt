@@ -1,0 +1,17 @@
+python-dotenv==1.0.1
+python-telegram-bot==21.6
+psutil==6.0.0
+mss==9.0.1
+Pillow==10.4.0
+PyYAML==6.0.2
+docker==7.1.0
+requests
+beautifulsoup4
+pyautogui
+SpeechRecognition
+pydub
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+pdfplumber
+python-docx

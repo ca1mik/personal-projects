@@ -1,26 +1,4 @@
 .env
-apps/web/.env.local
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-.mypy_cache/
-.next/
-node_modules/
-dist/
-.pnpm-store/
-.venv/
-third_party/
-storage/inputs/*
-!storage/inputs/.gitkeep
-storage/jobs/*
-!storage/jobs/.gitkeep
-storage/outputs/*
-!storage/outputs/.gitkeep
-
-# Local credentials and generated files
-.env
 .env.*
 !.env.example
 !.env.*.example
@@ -33,3 +11,10 @@ __pycache__/
 *.db
 *.sqlite*
 *.log
+secrets/
+credentials/
+storage_data/
+artifacts/
+inbox/
+outbox/
+models/

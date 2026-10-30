@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Monitor Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="page-shell stack">
+    <section class="card topbar">
+      <div>
+        <p class="eyebrow">Tinkoff Invest API</p>
+        <h1>Мониторинг акций</h1>
+        <p class="subtitle">Пользователь: {{ username }}</p>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge" id="connectionBadge">SSE: offline</span>
+        <a class="link-button" href="/logout">Выйти</a>
+      </div>
+    </section>
+
+    <section class="split">
+      <section class="card controls-card">
+        <div id="summaryPanel" class="summary-panel"></div>
+        <div id="banner" class="banner"></div>
+
+        <form id="monitoringForm" class="control-grid">
+          <label>
+            Тикеры
+            <textarea class="textarea" name="tickers">{{ defaults.tickers }}</textarea>
+          </label>
+          <label>
+            Изменение, %
+            <input class="input" name="change_percent" type="number" min="0.01" step="0.01" value="{{ defaults.change_percent }}">
+          </label>
+          <label>
+            Время поиска, мин
+            <input class="input" name="window_minutes" type="number" min="1" step="1" value="{{ defaults.window_minutes }}">
+          </label>
+          <label>
+            Откат, %
+            <input class="input" name="rollback_percent" type="number" min="0.01" max="50" step="0.01" value="{{ defaults.rollback_percent }}">
+          </label>
+          <div class="button-row">
+            <button id="startBtn" class="button button-primary" type="submit">Начать мониторинг</button>
+            <button id="stopBtn" class="button button-secondary" type="button">Остановить</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Имя</th>
+                <th>Изменение</th>
+                <th>Цена MIN</th>
+                <th>Цена MAX</th>
+                <th>Откат MIN</th>
+                <th>Откат MAX</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

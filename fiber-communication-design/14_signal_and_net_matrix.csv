@@ -1,0 +1,46 @@
+sheet,signal_name,signal_type,source,destination,notes
+SHEET_01_POWER,VIN_RAW,power,J1,F1,Unprotected input supply
+SHEET_01_POWER,VIN_PROTECTED,power,Q1,U1,Protected supply after reverse polarity stage
+SHEET_01_POWER,+5V_MAIN,power,U1,U10|U21|U40|U41,Main internal rail
+SHEET_01_POWER,+3V3_DIG,power,U2,U10|logic,Digital rail
+SHEET_01_POWER,+3V3_ANA,power,U3,U20|U21,Analog low-noise rail
+SHEET_01_POWER,+VAMP,power,U4,U30,Audio power amplifier rail
+SHEET_01_POWER,PWR_GOOD,status,U1/U2/U3,U10,Power good summary
+SHEET_01_POWER,VBAT_ADC,analog,U1 sense,U10 ADC,Battery measurement
+SHEET_02_CONTROLLER,KEY_CALL_N,digital_in,S1,U10,Call button active low
+SHEET_02_CONTROLLER,KEY_PTT_N,digital_in,S2,U10,PTT button active low
+SHEET_02_CONTROLLER,LED_PWR,digital_out,U10,LED1,Power indicator
+SHEET_02_CONTROLLER,LED_CALL,digital_out,U10,LED2,Call indicator
+SHEET_02_CONTROLLER,LED_TX,digital_out,U10,LED3,Transmit indicator
+SHEET_02_CONTROLLER,LED_FAULT,digital_out,U10,LED4,Fault indicator
+SHEET_02_CONTROLLER,BUZZER_EN,digital_out,U10,Q50,Local buzzer control
+SHEET_02_CONTROLLER,AMP_EN,digital_out,U10,U30,Audio amp enable
+SHEET_02_CONTROLLER,CODEC_EN,digital_out,U10,U21,Codec enable or power state
+SHEET_02_CONTROLLER,OPT_TX_EN,digital_out,U10,U40,Optical TX enable
+SHEET_02_CONTROLLER,FAULT_IN,digital_in,U62,U10,ORed fault summary
+SHEET_02_CONTROLLER,LINK_PRESENT,digital_in,U41/U42,U10,Optical link present
+SHEET_03_AUDIO_TX,MIC_IN+,analog,J20,U20A,Microphone positive input
+SHEET_03_AUDIO_TX,MIC_IN-,analog,J20,U20A,Microphone negative/reference input
+SHEET_03_AUDIO_TX,MIC_BIAS,analog_bias,bias net,J20,Electret or active mic bias
+SHEET_03_AUDIO_TX,MIC_PRE_OUT,analog,U20A,filter,Preamp output
+SHEET_03_AUDIO_TX,MIC_FILT_OUT,analog,filter,U21 ADC,Filtered speech path
+SHEET_03_AUDIO_TX,CODEC_ADC_IN,analog,filter,U21,ADC input of codec
+SHEET_04_AUDIO_RX,CODEC_DAC_OUT,analog,U21,post filter,DAC output
+SHEET_04_AUDIO_RX,AUDIO_RX_FILT,analog,post filter,U30,Filtered RX audio
+SHEET_04_AUDIO_RX,SPK_OUT+,power_audio,U30,J30,Speaker output positive
+SHEET_04_AUDIO_RX,SPK_OUT-,power_audio,U30,J30,Speaker output return
+SHEET_04_AUDIO_RX,AMP_FAULT,status,U30,U62,Amplifier fault if supported
+SHEET_05_OPTICAL_LINK,TX_DATA,digital,U10/U21 transport,U40,Transmit data stream
+SHEET_05_OPTICAL_LINK,RX_DATA,digital,U41,U10/U21 transport,Receive data stream
+SHEET_05_OPTICAL_LINK,OPT_TX_PWR,analog_ctrl,U40,optical TX,Optical transmitter drive path
+SHEET_05_OPTICAL_LINK,OPT_RX_SIG,digital_or_analog,optical RX,U41,Recovered receive stream
+SHEET_05_OPTICAL_LINK,LINK_FAULT,status,U41/U42,U62,Link fault summary
+SHEET_06_UI_AND_IO,KEY_CALL_N,digital,S1,U10,Call key
+SHEET_06_UI_AND_IO,KEY_PTT_N,digital,S2,U10,PTT key
+SHEET_06_UI_AND_IO,LED_PWR,digital,U10,LED1,Front panel LED
+SHEET_06_UI_AND_IO,LED_CALL,digital,U10,LED2,Front panel LED
+SHEET_06_UI_AND_IO,LED_TX,digital,U10,LED3,Front panel LED
+SHEET_06_UI_AND_IO,LED_FAULT,digital,U10,LED4,Front panel LED
+SHEET_06_UI_AND_IO,BUZZER_EN,digital,U10,Q50,Local acoustic alarm
+SHEET_07_SUPERVISION_AND_PROTECTION,FAULT_IN,status,U62,U10,Latched or combined fault line
+SHEET_07_SUPERVISION_AND_PROTECTION,SAFE_DISABLE,digital_out,U10,Q60/Q61,Load shedding or safe shutdown

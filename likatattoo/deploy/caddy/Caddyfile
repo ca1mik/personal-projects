@@ -1,0 +1,36 @@
+{
+    email levkaldin19@gmail.com
+    admin 127.0.0.1:2019
+    acme_ca https://acme-v02.api.letsencrypt.org/directory
+
+    storage file_system {
+        root ./deploy/caddy/storage
+    }
+
+    log default {
+        output file ./deploy/caddy/caddy-global.log
+        level INFO
+        format console
+    }
+}
+
+http://89.124.111.103,
+http://ppdstr.online,
+http://www.ppdstr.online {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8812
+}
+
+ppdstr.online {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8812
+}
+
+www.ppdstr.online {
+    redir https://ppdstr.online{uri}
+}
+
+http://ppdstr.ru,
+http://www.ppdstr.ru {
+    redir https://ppdstr.online{uri}
+}

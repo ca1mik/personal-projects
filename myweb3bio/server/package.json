@@ -1,0 +1,20 @@
+{
+  "name": "voice-ai-operator-backend",
+  "version": "0.1.0",
+  "description": "Express backend for AI assistant flows (SDR, Dental, Support, Delivery)",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

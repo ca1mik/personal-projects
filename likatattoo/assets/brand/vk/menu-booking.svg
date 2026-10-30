@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" rx="52" fill="#120D0B"/>
+  <rect x="30" y="30" width="1140" height="840" rx="38" stroke="rgba(255,255,255,0.08)"/>
+  <text x="84" y="116" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="6">06 / ЗАПИСЬ</text>
+  <text x="84" y="270" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="700">КАК</text>
+  <text x="84" y="392" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="700">ЗАПИСАТЬСЯ</text>
+  <text x="84" y="506" fill="#BFAFA2" font-family="Arial, Helvetica, sans-serif" font-size="36">Пришли идею, размер и место нанесения — по этим данным можно быстро дать ориентир.</text>
+</svg>

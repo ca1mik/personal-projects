@@ -1,0 +1,1 @@
+"""Labels service placeholder."""

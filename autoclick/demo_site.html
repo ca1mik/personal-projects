@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо цепочки действий</title>
+  <style>
+    body { margin: 0; background: #edf2f7; font: 16px system-ui, sans-serif; color: #1d2939; }
+    main { max-width: 600px; margin: 60px auto; padding: 32px; background: white; border-radius: 14px; box-shadow: 0 8px 30px #243b531c; }
+    h1 { margin-top: 0; font-size: 24px; }
+    .step { color: #475467; margin-bottom: 20px; }
+    label { display: block; margin: 16px 0 5px; }
+    input, select { box-sizing: border-box; width: 100%; padding: 10px; font: inherit; border: 1px solid #98a2b3; border-radius: 6px; }
+    button { margin-top: 24px; padding: 11px 18px; background: #175cd3; color: white; border: 0; border-radius: 6px; font: inherit; cursor: pointer; }
+    .summary { line-height: 1.8; }
+    .success { color: #067647; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Тестовый сайт: цепочка из четырёх шагов</h1>
+    <div id="step" class="step">Шаг 1/4: вход</div>
+    <form id="login">
+      <label for="username">Логин</label><input id="username" name="username" required>
+      <label for="password">Пароль</label><input id="password" name="password" type="password" required>
+      <button type="submit">Войти</button>
+    </form>
+    <form id="profile" hidden>
+      <label for="full_name">Имя</label><input id="full_name" name="full_name" required>
+      <label for="email">Email</label><input id="email" name="email" type="email" required>
+      <button type="submit">Продолжить</button>
+    </form>
+    <form id="order" hidden>
+      <label for="service">Услуга</label>
+      <select id="service" name="service"><option value="demo">Демо-заявка</option></select>
+      <label for="comment">Комментарий</label><input id="comment" name="comment" required>
+      <button type="submit">Проверить</button>
+    </form>
+    <section id="review" hidden>
+      <div id="summary" class="summary"></div>
+      <button id="finish" type="button">Подтвердить</button>
+    </section>
+    <section id="done" hidden><p class="success">Заявка успешно создана</p><p id="result"></p></section>
+  </main>
+  <script>
+    const state = {};
+    function show(current, next, text) {
+      document.getElementById(current).hidden = true;
+      document.getElementById(next).hidden = false;
+      document.getElementById('step').textContent = text;
+    }
+    document.getElementById('login').addEventListener('submit', event => {
+      event.preventDefault();
+      state.username = document.getElementById('username').value;
+      show('login', 'profile', 'Шаг 2/4: данные');
+    });
+    document.getElementById('profile').addEventListener('submit', event => {
+      event.preventDefault();
+      state.fullName = document.getElementById('full_name').value;
+      state.email = document.getElementById('email').value;
+      show('profile', 'order', 'Шаг 3/4: заявка');
+    });
+    document.getElementById('order').addEventListener('submit', event => {
+      event.preventDefault();
+      state.comment = document.getElementById('comment').value;
+      document.getElementById('summary').textContent = `${state.username} · ${state.fullName} · ${state.email} · ${state.comment}`;
+      show('order', 'review', 'Шаг 4/4: проверка');
+    });
+    document.getElementById('finish').addEventListener('click', () => {
+      document.getElementById('result').textContent = `Пользователь: ${state.username}; заявка: ${state.comment}`;
+      show('review', 'done', 'Готово');
+    });
+  </script>
+</body>
+</html>

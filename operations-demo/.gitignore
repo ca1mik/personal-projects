@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+.pytest_cache/
+test-results/
+*.log
+data/*-wal
+data/*-shm
+
+# Local credentials and generated files
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+*.log

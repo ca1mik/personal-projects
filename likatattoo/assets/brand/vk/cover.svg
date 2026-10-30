@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#120E0C"/>
+      <stop offset="0.55" stop-color="#0A0A0A"/>
+      <stop offset="1" stop-color="#47251A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1320 410) rotate(180) scale(440 220)">
+      <stop stop-color="#C65C42" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#C65C42" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="500" rx="32" fill="url(#bg)"/>
+  <rect x="26" y="26" width="1548" height="448" rx="24" stroke="rgba(255,255,255,0.09)"/>
+  <ellipse cx="1320" cy="410" rx="440" ry="220" fill="url(#glow)"/>
+  <g opacity="0.09">
+    <text x="1518" y="84" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700" text-anchor="end">PPDSTR</text>
+    <text x="1518" y="158" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700" text-anchor="end">TATTOO</text>
+  </g>
+  <text x="84" y="92" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="5">КАЗАНЬ / АККУРАТНЫЕ ТАТУИРОВКИ</text>
+  <text x="84" y="212" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="108" font-weight="700">PPDSTR</text>
+  <text x="84" y="318" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="108" font-weight="700">TATTOO</text>
+  <text x="84" y="372" fill="#F5EDE3" font-family="Georgia, serif" font-size="46" font-style="italic">надписи / минимализм / графика / цвет</text>
+  <text x="84" y="428" fill="#BFAFA2" font-family="Arial, Helvetica, sans-serif" font-size="28">Спокойная консультация, чистый процесс, понятный прайс и помощь с первой татуировкой.</text>
+  <g>
+    <rect x="1080" y="104" width="428" height="256" rx="28" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+    <text x="1122" y="154" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="4">ПОЧЕМУ СЮДА ПИШУТ</text>
+    <text x="1122" y="208" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Медицинское образование</text>
+    <text x="1122" y="248" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Одноразовые расходники</text>
+    <text x="1122" y="288" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Индивидуальный эскиз</text>
+    <text x="1122" y="328" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Подробный уход после сеанса</text>
+  </g>
+  <g>
+    <rect x="1080" y="386" width="212" height="54" rx="27" fill="#F5EDE3"/>
+    <text x="1186" y="421" fill="#0B0B0B" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Написать в сообщения</text>
+    <rect x="1302" y="386" width="206" height="54" rx="27" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+    <text x="1405" y="421" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Смотреть работы</text>
+  </g>
+</svg>

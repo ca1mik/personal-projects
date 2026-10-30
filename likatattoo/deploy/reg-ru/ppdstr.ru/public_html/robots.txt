@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /index.html
+Disallow: /dashboard.html
+Disallow: /vk-kit.html
+Disallow: /scripts/
+Disallow: /*-preview.png
+
+Sitemap: https://www.ppdstr.ru/sitemap.xml

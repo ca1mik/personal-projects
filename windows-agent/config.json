@@ -1,0 +1,15 @@
+{
+  "max_parallel_tasks": 2,
+  "assistant_thread": "01a16a0b-21bf-7b71-92dd-d6c09e793050",
+  "default_route": "assistant",
+  "assistant_auto_reasoning": true,
+  "hide_news_links": true,
+  "hh_redirect_uri": "http://127.0.0.1:8767/callback",
+  "timezone": "Europe/Moscow",
+  "startup_chain": {
+    "enabled": true,
+    "happ_exe": "C:\\Program Files\\FlyFrogLLC\\Happ\\Happ.exe",
+    "codex_exe": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.1016.8120.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe",
+    "wait_seconds": 600
+  }
+}

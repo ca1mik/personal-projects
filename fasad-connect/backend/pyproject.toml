@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fasad-backend"
+version = "0.1.0"
+description = "Backend for furniture/facade production automation platform"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.14.0",
+  "cryptography>=44.0.0",
+  "email-validator>=2.2.0",
+  "fastapi>=0.116.0",
+  "httpx>=0.28.1",
+  "imap-tools>=1.10.0",
+  # разбор списков деталей из выгрузок заказчика:
+  # openpyxl читает .xlsx, xlrd — старый бинарный .xls
+  "openpyxl>=3.1.5",
+  "passlib[bcrypt]>=1.7.4",
+  "pydantic-settings>=2.8.0",
+  "psycopg[binary]>=3.2.3",
+  "python-jose[cryptography]>=3.4.0",
+  "python-multipart>=0.0.20",
+  "redis>=6.0.0",
+  "rq>=2.1.0",
+  "sqlalchemy>=2.0.38",
+  "uvicorn[standard]>=0.34.0",
+  "xlrd>=2.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black>=25.1.0",
+  "pre-commit>=4.1.0",
+  "pytest>=8.3.5",
+  "pytest-cov>=6.0.0",
+  "pytest-mock>=3.14.0",
+  "ruff>=0.11.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+  "N",
+]
+ignore = [
+  "B008",
+  "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"app/modules/*/models.py" = ["F821"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+# "app/tests" - раньше был единственным путём: pytest backend/app/tests -q из
+# CLAUDE.md никогда не находил тесты, лежащие рядом с модулями
+# (app/modules/*/tests/, например leads/tests/test_blank_export.py на 142
+# строки) — они молча не запускались ни разу, сколько бы раз ни гоняли полный
+# набор проверок.
+testpaths = ["app/tests", "app/modules"]
+addopts = "-p no:cacheprovider"

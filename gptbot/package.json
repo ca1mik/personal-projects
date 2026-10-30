@@ -1,0 +1,16 @@
+{
+  "name": "gptbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Telegram bot with codex.sale chat completions",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node scripts/self-test.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}

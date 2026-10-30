@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" fill="none">
+  <defs>
+    <linearGradient id="avatarBg" x1="0" y1="0" x2="1000" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#110D0B"/>
+      <stop offset="0.6" stop-color="#0A0A0A"/>
+      <stop offset="1" stop-color="#5B2C1E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1000" rx="120" fill="url(#avatarBg)"/>
+  <rect x="42" y="42" width="916" height="916" rx="88" stroke="rgba(255,255,255,0.1)"/>
+  <text x="500" y="280" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="8" text-anchor="middle">КАЗАНЬ</text>
+  <text x="500" y="520" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="300" font-weight="700" text-anchor="middle">LT</text>
+  <text x="500" y="640" fill="#F5EDE3" font-family="Georgia, serif" font-size="88" font-style="italic" text-anchor="middle">tattoo</text>
+  <text x="500" y="756" fill="#BFAFA2" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="5" text-anchor="middle">АККУРАТНО / ЧИСТО / СПОКОЙНО</text>
+</svg>

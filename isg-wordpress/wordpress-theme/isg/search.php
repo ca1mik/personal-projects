@@ -1,0 +1,3 @@
+<?php get_header(); ?>
+<main id="main"><div class="page-intro"><div class="wrap"><?php isg_breadcrumbs(); ?><h1><?php printf(esc_html__('Search results for: %s', 'isg'), esc_html(get_search_query())); ?></h1></div></div><section class="section"><div class="wrap"><?php if (have_posts()) : ?><div class="catalog-grid"><?php while (have_posts()) : the_post(); get_template_part('template-parts/card', null, array('post' => get_post())); endwhile; ?></div><nav class="pagination"><?php the_posts_pagination(); ?></nav><?php else : ?><p class="empty"><?php esc_html_e('No results found.', 'isg'); ?></p><?php endif; ?></div></section></main>
+<?php get_footer(); ?>

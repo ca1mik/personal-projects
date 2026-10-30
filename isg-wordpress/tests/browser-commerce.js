@@ -1,0 +1,60 @@
+const { chromium } = require(process.env.ISG_PLAYWRIGHT || 'playwright');
+
+(async () => {
+  const browser = await chromium.launch({ headless: true, ...(process.env.ISG_CHROMIUM ? { executablePath: process.env.ISG_CHROMIUM } : {}) });
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('response', response => { if (response.url().includes('/wc/store/') && response.status() >= 400) console.log('Store API error:', response.status(), response.url()); });
+    const base = process.env.ISG_BASE_URL || 'http://127.0.0.1:8088';
+    await page.goto(base + '/product/isg-qa-options/', { waitUntil: 'networkidle' });
+    await page.locator('select[name="attribute_license"]').selectOption({ label: 'Extended' });
+    await page.locator('.single_variation .price').getByText('$19.99').waitFor();
+    await page.locator('select[name="attribute_license"]').selectOption({ label: 'Standard' });
+    await page.locator('.single_variation .price').getByText('$9.99').waitFor();
+    console.log('variation prices OK');
+    await page.goto(base + '/product/isg-qa-download/', { waitUntil: 'networkidle' });
+    await page.locator('button.single_add_to_cart_button').click();
+    console.log('after add URL:', page.url());
+    console.log('after add notice:', await page.locator('.woocommerce-notices-wrapper').innerText());
+    console.log('cookies:', (await page.context().cookies()).map(cookie => cookie.name).join(', '));
+    await page.goto(base + '/cart/', { waitUntil: 'networkidle' });
+    await page.locator('.wc-block-cart-items__row').getByText('ISG QA download (local test only)').waitFor();
+    const cart = await page.locator('body').innerText();
+    console.log('cart URL:', page.url());
+    console.log('cart excerpt:', cart.slice(0, 700));
+    console.log('cart REST:', await page.evaluate(async () => { const response = await fetch('/wp-json/wc/store/v1/cart'); return { status: response.status, body: (await response.text()).slice(0, 400) }; }));
+    console.log('errors:', errors);
+    await page.screenshot({ path: process.env.TEMP + '/isg-wp-runtime/cart.png', fullPage: true });
+    console.log('cart rows:', await page.locator('.wc-block-cart-items__row').count());
+    if (!cart.includes('ISG QA download') || !cart.includes('9.99')) throw new Error('Cart does not contain the test item and price.');
+    console.log('cart OK');
+    await page.setViewportSize({ width: 390, height: 844 });
+    const cartOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
+    if (cartOverflow) throw new Error('Mobile cart has horizontal overflow.');
+    console.log('mobile cart OK');
+    await page.goto(base + '/checkout/', { waitUntil: 'networkidle' });
+    await page.getByText('ISG QA download (local test only)').first().waitFor();
+    const checkoutOverflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 2);
+    if (checkoutOverflow) throw new Error('Mobile checkout has horizontal overflow.');
+    console.log('mobile checkout OK');
+    const text = await page.locator('body').innerText();
+    if (!text.includes('ISG QA download')) throw new Error('Checkout lost the cart item.');
+    console.log('checkout item OK');
+    console.log('checkout inputs:', await page.locator('input').evaluateAll(elements => elements.map(input => `${input.name}:${input.type}`).filter(Boolean).join(', ')));
+    console.log('payment methods:', await page.locator('label').allInnerTexts());
+    await page.locator('input[name="contact_email"]').fill('qa@example.test');
+    await page.locator('input[name="billing_first_name"]').fill('Local');
+    await page.locator('input[name="billing_last_name"]').fill('Tester');
+    await page.locator('input[name="billing_address_1"]').fill('1 Test Street');
+    await page.locator('input[name="billing_city"]').fill('New York');
+    await page.locator('input[name="billing_postcode"]').fill('10001');
+    await page.getByRole('button', { name: /place order/i }).click();
+    await page.waitForURL(/order-received|order-pay/, { timeout: 15000 });
+    console.log('order URL:', page.url());
+    if (errors.length) throw new Error(errors.join(' | '));
+  } finally {
+    await browser.close();
+  }
+})().catch(error => { console.error(error); process.exitCode = 1; });

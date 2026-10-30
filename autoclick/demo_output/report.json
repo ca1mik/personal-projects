@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-10-03T09:17:40.348312+00:00",
+  "browser_count": 10,
+  "results": [
+    {
+      "browser": 1,
+      "username": "demo_user_01",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 2,
+      "username": "demo_user_02",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 3,
+      "username": "demo_user_03",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 4,
+      "username": "demo_user_04",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 5,
+      "username": "demo_user_05",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 6,
+      "username": "demo_user_06",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 7,
+      "username": "demo_user_07",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 8,
+      "username": "demo_user_08",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 9,
+      "username": "demo_user_09",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    },
+    {
+      "browser": 10,
+      "username": "demo_user_10",
+      "status": "passed",
+      "steps": [
+        "login",
+        "profile",
+        "order",
+        "finish"
+      ]
+    }
+  ]
+}

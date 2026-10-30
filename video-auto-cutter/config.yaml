@@ -1,0 +1,54 @@
+input_dir: input
+downloads_dir: downloads
+output_dir: output
+processed_dir: processed
+logs_dir: logs
+
+target_width: 1080
+target_height: 1920
+fps: 30
+
+max_download_files_per_run: 4
+max_download_size_mb: 30
+
+video_extensions:
+  - .mp4
+  - .mov
+  - .mkv
+  - .avi
+  - .webm
+
+clips_per_video: 10
+shorts_duration_min: 18
+shorts_duration_max: 58
+ideal_duration_min: 25
+ideal_duration_max: 42
+
+timelapse_speed: 10
+
+enable_transcription: true
+enable_subtitles: true
+enable_hooks: true
+enable_cta: true
+enable_reports: true
+enable_yadisk_upload: false
+
+language: ru
+strategy: balanced
+mode: auto
+
+min_total_score: 45
+save_rejected: true
+generate_variants: true
+make_stories: false
+
+subtitle_style:
+  name: pro
+  font: Arial
+  font_size: 72
+  outline: 6
+  shadow: 2
+  max_chars_per_line: 24
+  max_lines: 2
+  margin_v: 260
+  uppercase_keywords: true

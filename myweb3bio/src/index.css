@@ -1,0 +1,9 @@
+/* index.css — базовый сброс, остальное в App.css */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Портфолио татуировок в Казани | PPDSTR</title>
+    <meta
+      name="description"
+      content="Полная галерея работ PPDSTR: надписи, минимализм, графика, цвет, персонажи и зажившие примеры татуировок в Казани."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0b0b0f" />
+    <link rel="canonical" href="https://www.ppdstr.ru/works" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PPDSTR" />
+    <meta property="og:title" content="Портфолио татуировок в Казани | PPDSTR" />
+    <meta
+      property="og:description"
+      content="Работы, по которым видно стиль, аккуратность и подход к деталям: полная галерея татуировок PPDSTR."
+    />
+    <meta property="og:url" content="https://www.ppdstr.ru/works" />
+    <meta property="og:image" content="https://www.ppdstr.ru/images/portfolio/graphic/graphic-back-01.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./client-theme.css" />
+  </head>
+  <body
+    class="client-page works-page"
+    data-page="works"
+    data-consumables-url="/data/consumables.json"
+    data-portfolio-url="/data/portfolio.json"
+    data-booking-url="/data/booking-snapshot.json"
+  >
+    <header class="ppd-header">
+      <div class="ppd-container ppd-header__inner">
+        <a class="ppd-brand" href="./client.html" aria-label="PPDSTR">
+          <span class="ppd-brand__mark">PPDSTR</span>
+          <span class="ppd-brand__meta">Татуировки в Казани</span>
+        </a>
+
+        <nav class="ppd-nav" aria-label="Основная навигация">
+          <a href="./client.html#portfolio">Портфолио</a>
+          <a href="./client.html#trust">Почему доверяют</a>
+          <a href="./client.html#pricing">Цены</a>
+          <a href="./client.html#process">Как проходит</a>
+          <a href="./client.html#faq">FAQ</a>
+        </nav>
+
+        <div class="ppd-header__actions">
+          <a class="ppd-button ppd-button--primary ppd-header__cta" href="./client.html#request">Получить расчет и записаться</a>
+          <button
+            class="ppd-burger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            data-nav-toggle
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="ppd-sr-only">Открыть меню</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="ppd-mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+        <div class="ppd-mobile-nav__panel">
+          <a href="./client.html#portfolio">Портфолио</a>
+          <a href="./client.html#trust">Почему доверяют</a>
+          <a href="./client.html#pricing">Цены</a>
+          <a href="./client.html#process">Как проходит</a>
+          <a href="./client.html#faq">FAQ</a>
+          <a href="./client.html#request">Записаться</a>
+          <a href="./works.html">Все работы</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="ppd-hero ppd-hero--works">
+        <div class="ppd-container ppd-hero--works__grid">
+          <div class="ppd-hero__content">
+            <p class="ppd-kicker">Полная галерея</p>
+            <h1>Портфолио PPDSTR</h1>
+            <p class="ppd-hero__lead">
+              Надписи, минимализм, графика, цвет, персонажи и зажившие примеры — без случайных дублей и лишнего шума.
+            </p>
+            <div class="ppd-actions">
+              <a class="ppd-button ppd-button--primary" href="./client.html#request">Получить расчет</a>
+              <a class="ppd-button ppd-button--ghost" href="./client.html">Вернуться на главную</a>
+            </div>
+          </div>
+
+          <div class="ppd-surface ppd-works-intro">
+            <strong>Что можно сделать здесь</strong>
+            <p>Открыть работу крупнее, посмотреть стиль, место, размер и ориентир по цене, а затем сразу уйти в заявку с выбранным примером.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ppd-section ppd-section--works" id="works">
+        <div class="ppd-container">
+          <div class="ppd-section__head">
+            <div>
+              <p class="ppd-kicker">Все работы</p>
+              <h2>Выберите стиль и откройте подходящие примеры</h2>
+            </div>
+            <div class="ppd-section__side">
+              <p>
+                На этой странице собраны все отобранные работы сайта. Если нужна похожая идея — откройте карточку и
+                сразу отправьте ее в заявку.
+              </p>
+              <p class="ppd-muted">Сейчас в галерее: <span data-works-count>0</span> карточек.</p>
+            </div>
+          </div>
+
+          <div class="ppd-filter-row" data-works-filters></div>
+          <div class="ppd-portfolio-grid ppd-portfolio-grid--full" data-works-portfolio>
+            <article class="ppd-surface ppd-empty-state">
+              <strong>Загружаем галерею</strong>
+              <p>Подтягиваем карточки работ и фильтры для полной страницы портфолио.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="ppd-footer">
+      <div class="ppd-container ppd-footer__grid">
+        <div>
+          <a class="ppd-brand ppd-brand--footer" href="./client.html">
+            <span class="ppd-brand__mark">PPDSTR</span>
+            <span class="ppd-brand__meta">Аккуратные татуировки в Казани</span>
+          </a>
+        </div>
+        <div>
+          <h3>Контакты</h3>
+          <ul class="ppd-footer__list">
+            <li>Казань, ул. Пушкина 52</li>
+            <li><a href="tel:+79656066455">+7 (965) 606-64-55</a></li>
+            <li><a href="https://vk.com/ppdstr23" target="_blank" rel="noreferrer">VK</a></li>
+            <li><a href="https://t.me/ppdstr_bot" target="_blank" rel="noreferrer">Telegram</a></li>
+            <li><a href="https://wa.me/79656066455" target="_blank" rel="noreferrer">WhatsApp</a></li>
+            <li><a href="https://yandex.ru/maps/?text=%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D1%8C%20%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D0%B0%2052" target="_blank" rel="noreferrer">Яндекс Карты</a></li>
+            <li><a href="https://2gis.ru/kazan/search/%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D0%B0%2052" target="_blank" rel="noreferrer">2ГИС</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Документы</h3>
+          <ul class="ppd-footer__list">
+            <li><a href="./offer.html">Оферта</a></li>
+            <li><a href="./payment.html">Оплата и возврат</a></li>
+            <li><a href="./privacy.html">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <dialog class="ppd-modal" data-work-modal>
+      <div class="ppd-modal__inner">
+        <button class="ppd-modal__close" type="button" aria-label="Закрыть" data-close-modal>×</button>
+        <div class="ppd-modal__media">
+          <img src="" alt="" data-modal-image />
+        </div>
+        <div class="ppd-modal__content">
+          <p class="ppd-kicker" data-modal-category>Работа</p>
+          <h3 data-modal-title>Работа из портфолио</h3>
+          <p class="ppd-modal__description" data-modal-description></p>
+          <div class="ppd-modal__meta">
+            <div><span>Размер</span><strong data-modal-size>—</strong></div>
+            <div><span>Место</span><strong data-modal-place>—</strong></div>
+            <div><span>Сеанс</span><strong data-modal-sessions>—</strong></div>
+            <div><span>Цена</span><strong data-modal-price>—</strong></div>
+          </div>
+          <div class="ppd-modal__tags" data-modal-tags></div>
+          <div class="ppd-actions">
+            <button class="ppd-button ppd-button--primary" type="button" data-modal-request>Хочу похожую</button>
+            <a class="ppd-button ppd-button--ghost" href="./client.html#request">Получить расчет</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="ppd-mobile-cta">
+      <a class="ppd-button ppd-button--primary" href="./client.html#request">Получить расчет</a>
+    </div>
+
+    <script src="./client.js"></script>
+  </body>
+</html>

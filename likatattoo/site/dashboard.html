@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ppdstr Dashboard</title>
+    <meta name="description" content="Внутренний дашборд проекта ppdstr: лиды, конверсия, платежи и контроль воронки." />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="hsl(220 15% 8%)" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg: hsl(222 20% 7%);
+        --surface: hsl(222 18% 11%);
+        --surface2: hsl(222 16% 15%);
+        --border: hsl(222 16% 20%);
+        --accent: hsl(38 90% 58%);
+        --accent-dim: hsl(38 60% 35%);
+        --green: hsl(145 60% 48%);
+        --red: hsl(0 65% 55%);
+        --blue: hsl(210 80% 58%);
+        --text: hsl(220 15% 92%);
+        --text-muted: hsl(220 10% 55%);
+        --radius: 12px;
+        --radius-sm: 8px;
+        font-family: 'Manrope', system-ui, sans-serif;
+        color-scheme: dark;
+      }
+
+      body { background: var(--bg); color: var(--text); min-height: 100vh; }
+
+      /* --- TOPBAR --- */
+      .topbar {
+        position: sticky; top: 0; z-index: 100;
+        background: hsla(222 20% 7% / 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+      }
+      .topbar-inner {
+        max-width: 1280px; margin: 0 auto;
+        display: flex; align-items: center; gap: 24px;
+        height: 56px;
+      }
+      .brand { font-weight: 800; font-size: 15px; color: var(--accent); text-decoration: none; letter-spacing: -.02em; }
+      .topbar-nav { display: flex; gap: 16px; margin-left: auto; }
+      .topbar-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+      .topbar-nav a:hover { color: var(--text); }
+      .topbar-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+      .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); }
+      .status-dot.ok { background: var(--green); box-shadow: 0 0 6px hsl(145 60% 48% / 0.5); }
+      .status-dot.err { background: var(--red); }
+
+      /* --- LAYOUT --- */
+      .shell { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+
+      /* --- API CONFIG --- */
+      .api-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 18px;
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 28px; flex-wrap: wrap;
+      }
+      .api-bar label { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+      .api-bar input {
+        flex: 1; min-width: 240px;
+        background: var(--surface2); border: 1px solid var(--border);
+        border-radius: var(--radius-sm); color: var(--text);
+        padding: 7px 12px; font-size: 13px; font-family: inherit;
+      }
+      .api-bar input:focus { outline: none; border-color: var(--accent); }
+      .btn { 
+        padding: 8px 16px; border-radius: var(--radius-sm); border: none;
+        font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+        transition: all .15s; white-space: nowrap;
+      }
+      .btn-primary { background: var(--accent); color: hsl(220 20% 8%); }
+      .btn-primary:hover { background: hsl(38 90% 65%); }
+      .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+      .btn-ghost:hover { background: var(--border); }
+      .btn-sm { padding: 5px 10px; font-size: 12px; }
+
+      /* --- SECTION TITLES --- */
+      .section-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+      .section-gap { margin-top: 36px; }
+
+      /* --- STAT GRID --- */
+      .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+        display: flex; flex-direction: column; gap: 6px;
+        transition: border-color .2s;
+      }
+      .stat-card:hover { border-color: var(--accent-dim); }
+      .stat-card__label { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+      .stat-card__value { font-size: 28px; font-weight: 800; color: var(--text); line-height: 1; }
+      .stat-card__sub { font-size: 12px; color: var(--text-muted); }
+      .stat-card.is-accent { border-color: var(--accent-dim); }
+      .stat-card.is-accent .stat-card__value { color: var(--accent); }
+      .stat-card.is-green .stat-card__value { color: var(--green); }
+
+      /* --- FUNNEL --- */
+      .funnel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 28px; }
+      .funnel-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+        position: relative; overflow: hidden;
+      }
+      .funnel-card__fill {
+        position: absolute; bottom: 0; left: 0; height: 3px;
+        background: var(--accent); border-radius: 0 0 var(--radius) var(--radius);
+        transition: width .6s cubic-bezier(.4,0,.2,1);
+      }
+      .funnel-card__label { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; }
+      .funnel-card__count { font-size: 24px; font-weight: 800; }
+      .funnel-card__pct { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+      /* --- CONVERSION BAR --- */
+      .conv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+      .conv-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 18px; text-align: center;
+      }
+      .conv-card__label { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
+      .conv-card__value { font-size: 22px; font-weight: 800; color: var(--accent); }
+
+      /* --- DATA TABLE --- */
+      .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+      .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      .data-table th {
+        background: var(--surface2); text-align: left;
+        padding: 10px 14px; font-weight: 600; color: var(--text-muted);
+        font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
+        border-bottom: 1px solid var(--border); white-space: nowrap;
+      }
+      .data-table td {
+        padding: 10px 14px; border-bottom: 1px solid hsl(222 16% 13%);
+        vertical-align: top; color: var(--text);
+      }
+      .data-table tr:last-child td { border-bottom: none; }
+      .data-table tr:hover td { background: hsl(222 16% 13%); }
+      .data-table .muted { color: var(--text-muted); }
+
+      /* --- STATUS BADGE --- */
+      .badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600;
+        white-space: nowrap;
+      }
+      .badge-new { background: hsl(222 30% 22%); color: hsl(210 80% 72%); }
+      .badge-contacted { background: hsl(38 40% 20%); color: hsl(38 90% 68%); }
+      .badge-consultation { background: hsl(260 30% 24%); color: hsl(270 70% 75%); }
+      .badge-waiting { background: hsl(200 30% 20%); color: hsl(200 70% 68%); }
+      .badge-confirmed { background: hsl(145 30% 18%); color: hsl(145 60% 58%); }
+      .badge-deposit { background: hsl(38 50% 18%); color: var(--accent); }
+      .badge-done { background: hsl(145 40% 16%); color: var(--green); }
+      .badge-archive { background: hsl(220 10% 18%); color: var(--text-muted); }
+
+      /* --- PAYMENT BADGE --- */
+      .pay-paid { color: var(--green); font-weight: 700; }
+      .pay-created { color: var(--text-muted); }
+      .pay-failed { color: var(--red); }
+
+      /* --- STALE ALERT --- */
+      .stale-alert {
+        background: hsl(0 40% 14%);
+        border: 1px solid hsl(0 50% 25%);
+        border-radius: var(--radius);
+        padding: 14px 18px;
+        margin-bottom: 16px;
+        display: flex; align-items: center; gap: 10px;
+        font-size: 13px; color: hsl(0 60% 70%);
+      }
+
+      /* --- INLINE FORM (status update) --- */
+      select.status-select {
+        background: var(--surface2); border: 1px solid var(--border);
+        border-radius: 6px; color: var(--text); padding: 3px 8px;
+        font-size: 12px; font-family: inherit; cursor: pointer;
+      }
+
+      /* --- EMPTY / SKELETON --- */
+      .empty { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; }
+      .skeleton-row td { opacity: .4; }
+
+      /* --- CONTENT / REVIEWS sections (localStorage) --- */
+      .local-section {
+        margin-top: 36px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .local-section__head {
+        padding: 16px 20px; border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .local-section__head h2 { font-size: 15px; font-weight: 700; }
+      .local-section__body { padding: 16px 20px; }
+      .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px; }
+      .form-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); }
+      .form-grid input, .form-grid select, .form-grid textarea {
+        background: var(--surface2); border: 1px solid var(--border);
+        border-radius: 6px; color: var(--text);
+        padding: 7px 10px; font-size: 13px; font-family: inherit;
+      }
+      .form-grid input:focus, .form-grid select:focus { outline: none; border-color: var(--accent); }
+      .form-span-2 { grid-column: span 2; }
+      .table-button { 
+        background: none; border: none; color: var(--text-muted); cursor: pointer;
+        font-size: 12px; padding: 2px 6px; border-radius: 4px;
+      }
+      .table-button:hover { background: var(--surface2); color: var(--red); }
+
+      /* --- SYNC STATUS --- */
+      .sync-bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+      .sync-bar .sync-msg { font-size: 12px; color: var(--text-muted); }
+      .sync-bar .sync-msg.ok { color: var(--green); }
+      .sync-bar .sync-msg.err { color: var(--red); }
+
+      @media (max-width: 640px) {
+        .stat-grid { grid-template-columns: repeat(2, 1fr); }
+        .funnel-grid { grid-template-columns: repeat(2, 1fr); }
+        .conv-grid { grid-template-columns: 1fr; }
+        .shell { padding: 20px 16px 60px; }
+        .api-bar { flex-direction: column; align-items: stretch; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./dashboard.html">ppdstr · Dashboard</a>
+        <nav class="topbar-nav">
+          <a href="./client.html">Сайт</a>
+          <a href="./index.html">Хаб</a>
+        </nav>
+        <div class="topbar-status">
+          <span class="status-dot" id="apiStatusDot"></span>
+          <span id="apiStatusText">—</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell">
+
+      <!-- API CONFIG BAR -->
+      <div class="api-bar">
+        <label for="apiUrlInput">URL бота (локальный или туннель)</label>
+        <input id="apiUrlInput" type="url" placeholder="http://127.0.0.1:8080" spellcheck="false" />
+        <button class="btn btn-primary" id="refreshBtn" type="button">↻ Обновить</button>
+        <button class="btn btn-ghost" id="syncCrmBtn" type="button">☁ Синх. CRM</button>
+        <div class="sync-bar">
+          <span class="sync-msg" id="syncMsg"></span>
+        </div>
+      </div>
+
+      <!-- SUMMARY STATS -->
+      <div class="section-title">Сводка</div>
+      <div class="stat-grid" id="statGrid">
+        <div class="stat-card is-accent">
+          <div class="stat-card__label">Всего заявок</div>
+          <div class="stat-card__value" id="statTotal">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Новых</div>
+          <div class="stat-card__value" id="statNew">—</div>
+        </div>
+        <div class="stat-card is-green">
+          <div class="stat-card__label">Предоплат</div>
+          <div class="stat-card__value" id="statDeposit">—</div>
+        </div>
+        <div class="stat-card is-green">
+          <div class="stat-card__label">Сделано</div>
+          <div class="stat-card__value" id="statDone">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Оплачено ₽</div>
+          <div class="stat-card__value" id="statRevenue">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Без движения</div>
+          <div class="stat-card__value" id="statStale">—</div>
+          <div class="stat-card__sub">более 7 дней</div>
+        </div>
+      </div>
+
+      <!-- CONVERSION -->
+      <div class="section-title section-gap">Конверсия воронки</div>
+      <div class="conv-grid">
+        <div class="conv-card">
+          <div class="conv-card__label">В переговоры</div>
+          <div class="conv-card__value" id="convContacted">—</div>
+        </div>
+        <div class="conv-card">
+          <div class="conv-card__label">До предоплаты</div>
+          <div class="conv-card__value" id="convDeposit">—</div>
+        </div>
+        <div class="conv-card">
+          <div class="conv-card__label">До сеанса</div>
+          <div class="conv-card__value" id="convDone">—</div>
+        </div>
+      </div>
+
+      <!-- FUNNEL -->
+      <div class="section-title section-gap">Воронка по статусам</div>
+      <div class="funnel-grid" id="funnelGrid">
+        <div class="funnel-card"><div class="funnel-card__label">Загрузка…</div></div>
+      </div>
+
+      <!-- STALE LEADS ALERT -->
+      <div id="staleAlert" style="display:none"></div>
+
+      <!-- LEADS TABLE -->
+      <div class="section-title section-gap">Последние заявки</div>
+      <div class="table-wrap" style="margin-bottom: 28px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Статус</th>
+              <th>Дата</th>
+              <th>Имя / контакт</th>
+              <th>Идея</th>
+              <th>Источник</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody">
+            <tr class="skeleton-row"><td colspan="7" class="empty">Загрузка заявок…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAYMENTS TABLE -->
+      <div class="section-title section-gap">Последние платежи</div>
+      <div class="table-wrap" style="margin-bottom: 36px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Дата</th>
+              <th>Канал</th>
+              <th>Услуга</th>
+              <th>Сумма</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody id="paymentsTableBody">
+            <tr class="skeleton-row"><td colspan="6" class="empty">Загрузка платежей…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LOCAL: CONTENT & REVIEWS (без изменений — localStorage) -->
+      <div class="local-section">
+        <div class="local-section__head">
+          <h2>Контент-план</h2>
+          <span id="statContent" style="font-size:13px;color:var(--text-muted)">0 единиц</span>
+        </div>
+        <div class="local-section__body">
+          <form id="contentForm" class="form-grid">
+            <label>Тема<input name="title" type="text" required /></label>
+            <label>Платформа
+              <select name="platform">
+                <option>VK</option><option>Telegram</option>
+                <option>VK + Telegram</option><option>Stories</option><option>Reels</option>
+              </select>
+            </label>
+            <label>Формат
+              <select name="format">
+                <option>Пост</option><option>Видео</option><option>Сторис</option><option>Карусель</option>
+              </select>
+            </label>
+            <label>Статус
+              <select name="status">
+                <option>Идея</option><option>В съемке</option>
+                <option>На монтаже</option><option>Готово</option><option>Опубликовано</option>
+              </select>
+            </label>
+            <label>Дата публикации<input name="publishDate" type="date" /></label>
+            <label class="form-span-2">Хук<input name="hook" type="text" /></label>
+            <button class="btn btn-primary btn-sm" type="submit">Добавить</button>
+          </form>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Тема</th><th>Платформа</th><th>Статус</th><th>Дата</th><th></th></tr></thead>
+              <tbody id="contentTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="local-section" style="margin-top:16px">
+        <div class="local-section__head">
+          <h2>Отзывы и зажившие фото</h2>
+          <span id="statReviews" style="font-size:13px;color:var(--text-muted)">0 записей</span>
+        </div>
+        <div class="local-section__body">
+          <form id="reviewForm" class="form-grid">
+            <label>Клиент<input name="name" type="text" required /></label>
+            <label>Площадка
+              <select name="platform">
+                <option>VK</option><option>Telegram</option>
+                <option>Яндекс Карты</option><option>2ГИС</option><option>Личное сообщение</option>
+              </select>
+            </label>
+            <label>Статус
+              <select name="status">
+                <option>Запрошен</option><option>Получен</option><option>Опубликован</option>
+              </select>
+            </label>
+            <label>Зажившее фото
+              <select name="healed">
+                <option>Не запрошено</option><option>Запрошено</option><option>Получено</option>
+              </select>
+            </label>
+            <label class="form-span-2">Комментарий<input name="notes" type="text" /></label>
+            <button class="btn btn-primary btn-sm" type="submit">Добавить</button>
+          </form>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Клиент</th><th>Площадка</th><th>Статус</th><th>Зажившее</th><th></th></tr></thead>
+              <tbody id="reviewTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <script src="./dashboard.js"></script>
+  </body>
+</html>

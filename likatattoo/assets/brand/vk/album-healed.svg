@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" rx="52" fill="#0C0C0C"/>
+  <rect x="30" y="30" width="1140" height="840" rx="38" stroke="rgba(255,255,255,0.08)"/>
+  <text x="84" y="118" fill="#EF8B70" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="6">АЛЬБОМ / ЗАЖИВШИЕ РАБОТЫ</text>
+  <text x="84" y="284" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="124" font-weight="700">ЗАЖИВШИЕ</text>
+  <text x="84" y="404" fill="#F5EDE3" font-family="Arial, Helvetica, sans-serif" font-size="124" font-weight="700">РАБОТЫ</text>
+  <text x="84" y="508" fill="#F5EDE3" font-family="Georgia, serif" font-size="56" font-style="italic">самый честный результат</text>
+</svg>

@@ -1,0 +1,22 @@
+{
+  "product": "Фасад Connect",
+  "version": "0.1.0",
+  "date": "2026-10-23",
+  "files": {
+    "connect/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "connect/app.py": "f0e97d10d5608b42147b41275c78621f756ddfa53071a93ece38dd481f48dece",
+    "connect/bootstrap.py": "31d3d613465838aa369036b4d179def80dd6719453c5f7a941cd3f3e3a222cbb",
+    "connect/crm.py": "c2d9ad185a1ac0683b6368c8babacded29ec06bfdf3c8a783439836bf8edeed3",
+    "connect/gateway.py": "768783335ea7498af020c85d66e718e7144712f937103d96b143122091ec2d56",
+    "connect/static/app.js": "38262d3ca509ae290c1deacdccf417ad860317245701f8449a120d2dbe4966e3",
+    "connect/static/index.html": "44e0f8d93e888e566c88aa81d7f82198bd46a8ec441bc147ee83b9f71407d258",
+    "connect/static/style.css": "9c087ffbdab36a22f3fc8e18ea1299be964639cf1122190440d8b93e42b3dd4b",
+    "connect/store.py": "dd359d401452b3a558c34b995ed87e63ccedb93d966e171aa4422a2d4b75ba5b",
+    "connect/tests/test_crm.py": "4c6f05b02cb322e1e853dbb7039d81e9ebb1f4078490ea6cf0400eb77dda9b1e",
+    "launch.py": "7dc452b85306c0970238e4ae0c9e9a048aa654eeba5b37aa7f1ff11c35fec021",
+    "start.bat": "41514f6b6c54b2de0c5387626c8c9b2d1f2d361953ce033e020601e15aa1a782",
+    "start-demo.bat": "3c8af9690cb4d51a87ba4cac649a726830e58380b8f0db525317870b8be75e46",
+    "stop.bat": "d19f82712608030ece8d0e16eca2051010aa4c65ec435802e9d9334ee15e891a",
+    "README.md": "df395bf1fcfbdd97a795b8d1951422e0ac11556588d5d01eaf77e62b1bd41189"
+  }
+}

@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+node_modules
+**/node_modules
+**/.next
+storage/inputs
+storage/jobs
+storage/outputs
+apps/web/.env.local
+

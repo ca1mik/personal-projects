@@ -1,0 +1,11 @@
+{
+  "name": "enya-local-3d-studio",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev:web": "pnpm --dir apps/web dev",
+    "build:web": "pnpm --dir apps/web build",
+    "lint:web": "pnpm --dir apps/web lint"
+  }
+}
+
